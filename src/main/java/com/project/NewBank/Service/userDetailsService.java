@@ -5,7 +5,23 @@
 
 package com.project.NewBank.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
-class detailsService {
+@Service
+class userDetailsService {
+    @Override
+    public static UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        // TODO Auto-generated method stub
+        @Autowired
+        private UserRepository userRepo;
 
+        User user = userRepo.findByEmail(email);
+
+        if(user == null){
+        throw new UnsupportedOperationException("Unimplemented method 'loadUserByUsername'");
+        }
+        return null;
+    }
 }

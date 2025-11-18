@@ -3,6 +3,7 @@ package com.project.NewBank.Service;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,8 +42,16 @@ public class JwtService {
         return extractClaims(token, Claims:: getSubject);
     }
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(Map<String, Object> map, UserDetails userDetails) {
+        UserDetails user = detailsService.loadUserByUsername(userDetails.getUsername());
+        Map<String, Object> claims = new Map<>;
+         
+        map.put("roles",user.getAuthorities.stream().collect(Collectors.toList()));
+        return createToken(claims, userDetails);
+    }
+    public String createToken(Map<String, Object> Claims, UserDetails userDetails) {
         return Jwts.builder()
+            .setClaims(claims)
             .setSubject(userDetails.getUsername())
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
@@ -57,6 +66,9 @@ public class JwtService {
 
     public String extractUsernameFromToken(String token) {
         return extractUsername(token);
+    }
+    public boolean validateToken(String token, UserDetails user) {
+        return user.getUsername().equals(extractUsername(token)) && !isTokenExpired(token);
     }
 
     
