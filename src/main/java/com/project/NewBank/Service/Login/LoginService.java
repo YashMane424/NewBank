@@ -53,6 +53,8 @@ public class LoginService {
             System.out.println("[DEBUG] LoginService: Authenticated user: " + userDetails.getUsername());
             String token = jwtService.generateToken(new HashMap<>(), userDetails);
             String refreshToken = jwtService.createRefreshToken(new HashMap<>(), userDetails);
+
+            
             LoginResponse response = new LoginResponse();
             response.setUsername(userDetails.getUsername());
             response.setRoles(userDetails.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toList()));
