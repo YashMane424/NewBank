@@ -1,5 +1,14 @@
 package com.project.NewBank.Service.Reporting;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.project.NewBank.Security.Response.DailyBalanceReport;
 import com.project.NewBank.model.Account;
 import com.project.NewBank.model.Transaction;
@@ -7,17 +16,10 @@ import com.project.NewBank.model.User;
 import com.project.NewBank.repository.AccountRepository;
 import com.project.NewBank.repository.TransactionRepository;
 import com.project.NewBank.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

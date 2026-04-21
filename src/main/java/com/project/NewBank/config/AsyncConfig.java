@@ -23,4 +23,16 @@ public class AsyncConfig {
         return executor;
     }
     
+    @Bean(name = "dashboardExecutor")
+    public Executor dashboardExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(10);
+        executor.setQueueCapacity(50);
+        executor.setThreadNamePrefix("Dashboard-");
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.initialize();
+        return executor;
+    }
+    
 }
