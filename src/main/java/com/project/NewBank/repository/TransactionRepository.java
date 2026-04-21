@@ -1,5 +1,6 @@
 package com.project.NewBank.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,11 @@ import com.project.NewBank.model.Transaction;
 public interface TransactionRepository extends JpaRepository<Transaction, Object> {
     
    List<Transaction> findByFromAccountOrToAccountOrderByTransactionDateDesc(Account fromAccount, Account toAccount);
+
+   List<Transaction> findByFromAccountOrToAccountAndTransactionDateBetweenOrderByTransactionDateDesc(
+    Account fromAccount,
+    Account toAccount,
+    LocalDateTime from,
+    LocalDateTime to
+   );
 }
